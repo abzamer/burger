@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/abzamer/burger/issues"
   },
-  "homepage": "https://github.com/abzamer/burger#readme"
+  "homepage": "https://github.com/abzamer/burger#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
 }
