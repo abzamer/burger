@@ -1,10 +1,12 @@
-var connection = require("./connection");
+// this was the HARDEST part
 
-//not sure what this function will do; it may be printing out the devour it
+var connection = require("./connection.js");
+
+// this JUST prints out the question marks
 function printQuestionMarks(num) {
     var arr = [];
-    for (var i = 0; i < num; I++) {
-        arr.push("What is this doing?");
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
     }
     return arr.toString();
 }
@@ -13,23 +15,12 @@ function printQuestionMarks(num) {
 function objToSql(ob) {
     var arr = [];
 
-    //loop through the keys and push the key/value as a string int arr
     for (var key in ob) {
-        var value = ob[key];
-        //check to skip hidden properties
-        if (Object.hasOwnProperty.call(ob, key)) {
-            //if string with spaces, add quotations (Bacon Burger => 'Bacon Burger')
-            if (typeof value === "string" && value.indexOf(" ") >= 0) {
-                value = "'" + value + "'";
-            }
-            //e.g. {name: 'bacon burger'} => ["name='bacon burger'"]
-            //e.g. {sleepy: true} => ["sleepy=true"]
-            arr.push(key + "=" + value);
+        arr.push(key + "=" + ob[key]);
         }
+        //translate array of strings to a single comma-separated string
+        return arr.toString();
     }
-    //translate array of strings to a single comma-separated string
-    return arr.toString();
-}
 
 var orm = {
     //selectAll()
@@ -41,8 +32,8 @@ var orm = {
             }
             cb(result);
         });
-    };
-    //insertOne
+    },
+    // Seems like this is inserting cols and a place for values
     create: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO" + table;
 
@@ -62,9 +53,9 @@ var orm = {
 
             cb(result);
         });
-    };
+    },
 
-    //update
+    // update: I think this is where values go
     update: function (table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
 
@@ -82,6 +73,7 @@ var orm = {
             cb(result);
         });
     },
+    
     delete: function (table, condition, cb) {
         var queryString = "DELETE FROM " + table;
         queryString += " WHERE ";

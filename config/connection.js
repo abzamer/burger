@@ -2,8 +2,6 @@ var mysql = require("mysql");
 // var inquirer = require("inquirer");
 require("dotenv").config();
 
-//reference bamazon & activity 12: orm example
-
 //create connection for sql database
 var connection = mysql.createConnection({
     host: "localhost",
